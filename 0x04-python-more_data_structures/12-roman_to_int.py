@@ -1,11 +1,7 @@
 #!/usr/bin/python3
 
 def roman_to_int(roman_string):
-    if (not isinstance(roman_string, str) or
-            roman_string is None):
-        return (0)
-
-    roman_dict = {
+    dic = {
             "I": 1,
             "V": 5,
             "X": 10,
@@ -15,15 +11,12 @@ def roman_to_int(roman_string):
             "M": 1000
     }
     num = 0
-
-    for i in range(len(roman_string)):
-        if roman_dict.get(roman_string[i], 0) == 0:
-            return (0)
-
-        if (i != (len(roman_string) - 1) and
-                roman_dict[roman_string[i]] < roman_dict[roman_string[i + 1]]):
-                num += roman_dict[roman_string[i]] * -1
-
+    roman = roman_string
+    if type(roman) is not str or len(roman) is 0:
+        return 0
+    for i in range(len(roman)):
+        if i < len(roman) - 1 and dic[roman[i]] < dic[roman[i + 1]]:
+            num -= dic[roman[i]]
         else:
-            num += roman_dict[roman_string[i]]
+            num += dic[roman[i]]
     return (num)
